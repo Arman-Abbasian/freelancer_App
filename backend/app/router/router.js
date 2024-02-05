@@ -1,3 +1,4 @@
+const expressAsyncHandler = require("express-async-handler");
 const { ROLES } = require("../../utils/constants");
 const { authorize } = require("../http/middlewares/permission.guard");
 const {
@@ -9,6 +10,7 @@ const { categoryRoutes } = require("./category");
 const { projectRoutes } = require("./project");
 const { proposalRoutes } = require("./proposal");
 const { userAuthRoutes } = require("./userAuth");
+const { ProjectController } = require("../http/controllers/project.controller");
 
 const router = require("express").Router();
 
@@ -20,6 +22,11 @@ router.use(
   isVerifiedUser,
   // authorize(ROLES.ADMIN, ROLES.OWNER),
   projectRoutes
+);
+router.get(
+  "/allProjects",
+  // authorize(ROLES.ADMIN, ROLES.OWNER),
+  expressAsyncHandler(ProjectController.getListOfProjects)
 );
 router.use("/proposal", verifyAccessToken, isVerifiedUser, proposalRoutes);
 router.use(
