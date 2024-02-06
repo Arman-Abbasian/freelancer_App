@@ -19,7 +19,7 @@ export default function useProjects() {
   return { isLoading, projects };
 }
 
-export  function useGetAllProjects() {
+export function useGetAllProjects() {
   const { search } = useLocation();
   // const queryObject = queryString.parse(search);
 
