@@ -3,6 +3,7 @@ import useProjects, { useGetAllProjects } from "../hooks/useProjects";
 
 import Loading from "../ui/Loading";
 import toLocalDateShort from "../utils/toLocalDateShort";
+import { toPersianNumbersWithComma } from "../utils/toPersianNumbers";
 
 function Home() {
   const {isLoading,projects=[]}=useGetAllProjects();
@@ -10,7 +11,7 @@ function Home() {
   return (
     <div className="h-screen p-2 bg-secondary-0 text-secondary-900 flex flex-col">
       <h1 className="flex-none text-center pt-10 mb-10 text-2xl font-bold">پروژه‌های دلخواه خود را ببین, انتخاب کن و انجامش بده  </h1>
-      <div className="flex-none container xl:max-w-screen-xl">
+      <div className="flex-none container xl:max-w-screen-xl mb-10">
     <Stats
       proposals={14000}
       users={280000}
@@ -26,6 +27,7 @@ function Home() {
             <p><strong>تاریخ ایجاد: </strong>{toLocalDateShort(item.createdAt)}</p>
             <p><strong>توضیحات: </strong>{item.description}</p>
             <p><strong>تاریخ تحویل: </strong>{toLocalDateShort(item.deadline)}</p>
+            <p><strong>بودجه: </strong>{toPersianNumbersWithComma(item.budget)}</p>
             </div>
         })
        }
