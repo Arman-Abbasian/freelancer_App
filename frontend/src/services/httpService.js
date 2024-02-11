@@ -1,6 +1,6 @@
 import axios from "axios";
 //http://localhost:5000/api
-const BASE_URL = "https://freelancer-app-27qk.onrender.com/api";
+const BASE_URL = "https://freelancer-app.liara.run/api";
 
 const app = axios.create({
   baseURL: BASE_URL,
