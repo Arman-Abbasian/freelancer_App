@@ -32,8 +32,9 @@ class userAuthController extends Controller {
     phoneNumber = phoneNumber.trim();
     this.phoneNumber = phoneNumber;
     this.code = generateRandomNumber(6);
-    console.log(this.code)
+    console.log(this.code);
     const result = await this.saveUser(phoneNumber);
+    console.log(result);
     if (!result) throw createError.Unauthorized("ورود شما انجام نشد.");
 
     // send OTP
@@ -71,6 +72,7 @@ class userAuthController extends Controller {
       data: {
         message: WELLCOME_MESSAGE,
         user,
+        otpCode: this.code,
       },
     });
   }
@@ -116,23 +118,24 @@ class userAuthController extends Controller {
     //   },
     //   (response, status) => {
     //     console.log("kavenegar message status", status);
-    //     if (response && status === 200)
-          return res.status(HttpStatus.OK).send({
-            statusCode: HttpStatus.OK,
-            data: {
-              message: `کد تائید برای شماره موبایل ${toPersianDigits(
-                phoneNumber
-              )} ارسال گردید`,
-              expiresIn: CODE_EXPIRES,
-              phoneNumber,
-            },
-          });
+    if (response && status === 200)
+      return res.status(HttpStatus.OK).send({
+        statusCode: HttpStatus.OK,
+        data: {
+          message: `کد تائید برای شماره موبایل ${toPersianDigits(
+            phoneNumber
+          )} ارسال گردید`,
+          expiresIn: CODE_EXPIRES,
+          otpCode: this.code,
+          phoneNumber,
+        },
+      });
 
-        return res.status(status).send({
-          statusCode: status,
-          message: "کد اعتبارسنجی ارسال نشد",
-        });
-     // });
+    return res.status(status).send({
+      statusCode: status,
+      message: "کد اعتبارسنجی ارسال نشد",
+    });
+    // });
   }
   async completeProfile(req, res) {
     await completeProfileSchema.validateAsync(req.body);

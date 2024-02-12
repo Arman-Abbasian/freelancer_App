@@ -12,6 +12,10 @@ class Application {
   #app = express();
   #PORT = process.env.PORT || 5000;
   #DB_URI = process.env.APP_DB;
+  #allowedOrigins = [
+    "http://localhost:3000",
+    "https://freelancer-app-arman.onrender.com",
+  ];
 
   constructor() {
     this.createServer();
@@ -36,9 +40,7 @@ class Application {
       .catch((err) => console.log("Failed to connect to MongoDB", err));
   }
   configServer() {
-    this.#app.use(
-      cors({ credentials: true, origin: process.env.ALLOW_CORS_ORIGIN })
-    );
+    this.#app.use(cors({ credentials: true, origin: this.#allowedOrigins }));
     this.#app.use(express.json());
     this.#app.use(express.urlencoded({ extended: true }));
     this.#app.use(express.static(path.join(__dirname, "..")));
