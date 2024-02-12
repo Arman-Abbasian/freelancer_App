@@ -118,23 +118,23 @@ class userAuthController extends Controller {
     //   },
     //   (response, status) => {
     //     console.log("kavenegar message status", status);
-    if (response && status === 200)
-      return res.status(HttpStatus.OK).send({
-        statusCode: HttpStatus.OK,
-        data: {
-          message: `کد تائید برای شماره موبایل ${toPersianDigits(
-            phoneNumber
-          )} ارسال گردید`,
-          expiresIn: CODE_EXPIRES,
-          otpCode: this.code,
-          phoneNumber,
-        },
-      });
-
-    return res.status(status).send({
-      statusCode: status,
-      message: "کد اعتبارسنجی ارسال نشد",
+    //if (response && status === 200)
+    console.log({ otpCode: this.code, phoneNumber });
+    return res.status(HttpStatus.OK).send({
+      statusCode: HttpStatus.OK,
+      data: {
+        message: `کد تائید برای شماره موبایل ${toPersianDigits(
+          phoneNumber
+        )} ارسال گردید`,
+        expiresIn: CODE_EXPIRES,
+        otpCode: this.code,
+        phoneNumber,
+      },
     });
+    // return res.status(status).send({
+    //   statusCode: status,
+    //   message: "کد اعتبارسنجی ارسال نشد",
+    //});
     // });
   }
   async completeProfile(req, res) {

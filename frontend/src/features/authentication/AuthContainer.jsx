@@ -28,8 +28,8 @@ function AuthContainer() {
 
   const sendOtpHandler = async (data) => {
     try {
-      const { message, user } = await mutateAsync(data);
-      console.log({ user });
+      const { message, otpCode } = await mutateAsync(data);
+      console.log({ otpCode });
       setStep(2);
       toast.success(message);
     } catch (error) {

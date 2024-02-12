@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { HiArrowRight } from "react-icons/hi";
 import { CiEdit } from "react-icons/ci";
 import Loading from "../../ui/Loading";
+import { BsExclamationTriangle } from "react-icons/bs";
+import { toPersianNumbers } from "../../utils/toPersianNumbers";
 
 const RESEND_TIME = 90;
 
@@ -61,7 +63,21 @@ function CheckOTPForm({ phoneNumber, onBack, onReSendOtp, otpResponse }) {
       )}
       <div className="mb-4 text-secondary-500">
         {time > 0 ? (
-          <p> {time} ثانیه تا ارسال مجدد کد</p>
+          <>
+            <div>
+              <p>
+                کد ارسال شده{" "}
+                <span className="text-primary-700">{otpResponse.otpCode}</span>
+              </p>
+              <div className="flex items-center gap-0.5">
+                <BsExclamationTriangle className="text-warning w-5 h-5" />
+                <p className="text-sm ">
+                  در وب اپلیکیشن های واقعی این کد از طریق پیامک ارسال می گردد
+                </p>
+              </div>
+            </div>
+            <p>{toPersianNumbers(time)} ثانیه تا ارسال مجدد کد</p>
+          </>
         ) : (
           <button onClick={onReSendOtp}>ارسال مجدد کد تایید</button>
         )}
