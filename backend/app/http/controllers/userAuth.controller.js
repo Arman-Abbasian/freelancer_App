@@ -23,6 +23,7 @@ class userAuthController extends Controller {
     this.code = 0;
     this.phoneNumber = null;
   }
+
   async getOtp(req, res) {
     let { phoneNumber } = req.body;
 
@@ -32,9 +33,7 @@ class userAuthController extends Controller {
     phoneNumber = phoneNumber.trim();
     this.phoneNumber = phoneNumber;
     this.code = generateRandomNumber(6);
-    console.log(this.code);
     const result = await this.saveUser(phoneNumber);
-    console.log(result);
     if (!result) throw createError.Unauthorized("ورود شما انجام نشد.");
 
     // send OTP
@@ -43,7 +42,6 @@ class userAuthController extends Controller {
   async checkOtp(req, res) {
     await checkOtpSchema.validateAsync(req.body);
     const { otp: code, phoneNumber } = req.body;
-
     const user = await UserModel.findOne(
       { phoneNumber },
       { password: 0, refreshToken: 0, accessToken: 0 }
@@ -59,7 +57,6 @@ class userAuthController extends Controller {
 
     user.isVerifiedPhoneNumber = true;
     await user.save();
-
     // await setAuthCookie(res, user); // set httpOnly cookie
     await setAccessToken(res, user);
     await setRefreshToken(res, user);
@@ -119,7 +116,6 @@ class userAuthController extends Controller {
     //   (response, status) => {
     //     console.log("kavenegar message status", status);
     //if (response && status === 200)
-    console.log({ otpCode: this.code, phoneNumber });
     return res.status(HttpStatus.OK).send({
       statusCode: HttpStatus.OK,
       data: {
@@ -218,11 +214,11 @@ class userAuthController extends Controller {
       expires: Date.now(),
       httpOnly: true,
       signed: true,
-      sameSite: "Lax",
+      sameSite: "None",
       secure: true,
       path: "/",
-      domain:
-        process.env.NODE_ENV === "development" ? "localhost" : ".fronthooks.ir",
+      //domain:
+      //process.env.NODE_ENV === "development" ? "localhost" : ".fronthooks.ir",
     };
     res.cookie("accessToken", null, cookieOptions);
     res.cookie("refreshToken", null, cookieOptions);

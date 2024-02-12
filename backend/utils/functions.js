@@ -29,10 +29,12 @@ async function setAccessToken(res, user) {
     maxAge: 1000 * 60 * 60 * 24 * 1, // would expire after 1 days
     httpOnly: true, // The cookie only accessible by the web server
     signed: true, // Indicates if the cookie should be signed
-    sameSite: "Lax",
+    sameSite: "None",
     secure: process.env.NODE_ENV === "development" ? false : true,
-    domain:
-      process.env.NODE_ENV === "development" ? "localhost" : ".fronthooks.ir",
+    // domain:
+    //   process.env.NODE_ENV === "development"
+    //     ? "localhost"
+    //     : ["localhost", ".onrender.com"],
   };
   res.cookie(
     "accessToken",
@@ -46,10 +48,12 @@ async function setRefreshToken(res, user) {
     maxAge: 1000 * 60 * 60 * 24 * 365, // would expire after 1 year
     httpOnly: true, // The cookie only accessible by the web server
     signed: true, // Indicates if the cookie should be signed
-    sameSite: "Lax",
+    sameSite: "None",
     secure: process.env.NODE_ENV === "development" ? false : true,
-    domain:
-      process.env.NODE_ENV === "development" ? "localhost" : ".fronthooks.ir",
+    // domain:
+    //   process.env.NODE_ENV === "development"
+    //     ? "localhost"
+    //     : ["localhost", ".onrender.com"],
   };
   res.cookie(
     "refreshToken",
@@ -287,9 +291,11 @@ async function getUserCartDetail(userId) {
   ]);
   return copyObject(cartDetail);
 }
+
 function copyObject(object) {
   return JSON.parse(JSON.stringify(object));
 }
+
 function deleteInvalidPropertyInObject(data = {}, blackListFields = []) {
   // let nullishData = ["", " ", "0", 0, null, undefined];
   let nullishData = ["", " ", null, undefined];
@@ -302,6 +308,7 @@ function deleteInvalidPropertyInObject(data = {}, blackListFields = []) {
     if (nullishData.includes(data[key])) delete data[key];
   });
 }
+
 async function checkProductExist(id) {
   const { ProductModel } = require("../app/models/product");
   if (!mongoose.isValidObjectId(id))
