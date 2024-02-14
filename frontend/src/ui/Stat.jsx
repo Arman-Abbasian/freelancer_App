@@ -11,7 +11,7 @@ function Stat({ icon, value, title, color }) {
   // const textColor = `text-${color}-700`;
 
   return (
-    <div className="col-span-1 flex flex-col items-center lg:grid lg:grid-rows-2 lg:grid-cols-[6.4rem_1fr] bg-secondary-200 p-4 rounded-lg lg:gap-x-4">
+    <div className="col-span-1 flex flex-col items-center gap-y-4 lg:gap-y-0 lg:grid lg:grid-rows-2 lg:grid-cols-[6.4rem_1fr] bg-secondary-200 p-4 rounded-lg lg:gap-x-4">
       <div
         className={`lg:row-span-2 flex items-center justify-center
        p-2 aspect-square rounded-full bg-gray-200

@@ -3,7 +3,7 @@ import Header from "./Header";
 
 function AppLayout({ children }) {
   return (
-    <div className="grid h-screen grid-rows-[auto_1fr] grid-cols-[15rem_1fr]">
+    <div className="bg-secondary-100 h-screen flex flex-col  lg:grid  lg:grid-rows-[auto_1fr] lg:grid-cols-[15rem_1fr]">
       <Header />
       {children}
       <div className="bg-secondary-100 p-8 overflow-y-auto">

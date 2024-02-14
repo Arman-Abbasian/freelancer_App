@@ -6,9 +6,8 @@ import FilterDropDown from "../../../ui/FilterDropDown";
 function ProjectsHeader() {
   const { transformedCategories } = useCategories();
   return (
-    <div className="flex items-center justify-between text-secondary-700 mb-8">
-      <h1 className="text-lg font-bold">لیست پروژه ها</h1>
-      <div className="flex gap-x-8 items-center">
+    <div className="flex items-center justify-center text-secondary-700 mb-8">
+      <div className="flex flex-col gap-y-4 lg:gap-x-8 items-center">
         <Filter filterField="status" options={statusOptions} />
         <FilterDropDown filterField="sort" options={sortOptions} />
         <FilterDropDown
