@@ -14,7 +14,7 @@ function Stats({ projects }) {
   );
 
   return (
-    <div className="grid grid-cols-3 gap-8">
+    <div className="grid lg:grid-cols-3 gap-8">
       <Stat
         color="primary"
         title="پروژه ها"

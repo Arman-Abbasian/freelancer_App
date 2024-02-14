@@ -3,7 +3,7 @@ import Stat from "../../ui/Stat";
 
 function Stats({ proposals, users, projects }) {
   return (
-    <div className="grid grid-cols-3 gap-8">
+    <div className="grid grid-cols-3 gap-6">
       <Stat
         color="orange"
         title="کاربران"
