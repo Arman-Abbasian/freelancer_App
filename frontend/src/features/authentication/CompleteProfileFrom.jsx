@@ -27,8 +27,8 @@ function CompleteProfileFrom() {
       const { user, message } = await mutateAsync(data);
       toast.success(message);
       if (!user.status !== 2) {
-        navigate("/");
-        toast("پروفایل شما در انتظار تایید است", { icon: "👏" });
+        navigate(`/${user.role.toLowerCase()}`);
+        //toast("پروفایل شما در انتظار تایید است", { icon: "👏" });
         return;
       }
       if (user.role === "OWNER") return navigate("/owner");

@@ -20,7 +20,7 @@ function Stat({ icon, value, title, color }) {
       >
         {icon}
       </div>
-      <h5 className="font-bold text-secondary-500 text-lg self-center">
+      <h5 className="font-bold text-secondary-500 text-sm whitespace-nowrap lg:text-lg self-center">
         {title}
       </h5>
       <p className="text-lg lg:text-3xl font-bold text-secondary-900">

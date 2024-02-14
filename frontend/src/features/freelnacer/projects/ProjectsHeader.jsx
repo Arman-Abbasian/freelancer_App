@@ -1,32 +1,7 @@
+import { sortOptions, statusOptions } from "../../../constants/filterOptions";
 import useCategories from "../../../hooks/useCategories";
 import Filter from "../../../ui/Filter";
 import FilterDropDown from "../../../ui/FilterDropDown";
-
-const sortOptions = [
-  {
-    label: "مرتب سازی (جدید ترین)",
-    value: "latest",
-  },
-  {
-    label: "مرتب سازی (قدیمی ترین)",
-    value: "earliest",
-  },
-];
-
-const statusOptions = [
-  {
-    label: "همه",
-    value: "ALL",
-  },
-  {
-    label: "باز",
-    value: "OPEN",
-  },
-  {
-    label: "بسته",
-    value: "CLOSED",
-  },
-];
 
 function ProjectsHeader() {
   const { transformedCategories } = useCategories();

@@ -147,10 +147,11 @@ class userAuthController extends Controller {
       throw createError.BadRequest(
         "کاربری با این ایمیل قبلا ثبت نام کرده است."
       );
-
+    //"status: 2" i add this proprty myself to online my project
+    //but in real project the admin should change the status after considering to 0 or 2
     const updatedUser = await UserModel.findOneAndUpdate(
       { _id: user._id },
-      { $set: { name, email, isActive: true, role } },
+      { $set: { name, email, isActive: true, role, status: 2 } },
       { new: true }
     );
     // await setAuthCookie(res, updatedUser);
