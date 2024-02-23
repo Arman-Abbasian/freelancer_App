@@ -13,6 +13,7 @@ function Home() {
   const { isLoading, projects = [] } = useGetAllProjects();
   const { user, isLoading: isGettingUser } = useUser();
   const { transformedCategories } = useCategories();
+  console.log(user);
   return (
     <div className="h-screen p-2 bg-secondary-100 text-secondary-900 flex flex-col gap-y-2">
       <div className="flex-none container xl:max-w-xl flex items-center justify-between">
@@ -26,6 +27,10 @@ function Home() {
               </Link>
             ) : user && user.role === "FREELANCER" ? (
               <Link to={"/freelancer"} className="text-primary-900">
+                {user.name}
+              </Link>
+            ) : user && user.role === "ADMIN" ? (
+              <Link to={"/admin"} className="text-primary-900">
                 {user.name}
               </Link>
             ) : (
@@ -43,7 +48,7 @@ function Home() {
       <div className="flex-none container xl:max-w-screen-xl mb-10">
         <Stats proposals={14000} users={280000} projects={50000} />
       </div>
-      <div className="flex-none flex justify-between items-center container gap-2 xl:max-w-xl">
+      <div className="flex-none flex justify-between items-center container gap-2 lg:max-w-lg">
         <FilterDropDown filterField="sort" options={sortOptions} />
         <FilterDropDown
           filterField="category"
@@ -58,7 +63,7 @@ function Home() {
       </div>
       <div
         className="flex-grow p-4 rounded-md space-y-8 container scroll-container
-       xl:max-w-xl shadow-md shadow-secondary-300 backdrop-blur-lg overflow-y-auto"
+       lg:max-w-lg shadow-md shadow-secondary-300 backdrop-blur-lg overflow-y-auto"
       >
         {isLoading ? (
           <Loading />
